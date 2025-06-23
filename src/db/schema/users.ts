@@ -9,5 +9,5 @@ export const users = pgTable('users', {
   phone: text('phone'),
   role: userRoleEnum('role').default('customer').notNull(),
   createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull().defaultNow()
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
 })

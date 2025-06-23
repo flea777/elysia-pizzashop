@@ -6,4 +6,3 @@ import { env } from '../env'
 const connection = postgres(env.DATABASE_URL)
 
 export const db = drizzle(connection, { schema })
-

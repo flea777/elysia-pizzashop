@@ -1,4 +1,4 @@
-import { uuid, text, timestamp, pgTable} from 'drizzle-orm/pg-core'
+import { uuid, text, timestamp, pgTable } from 'drizzle-orm/pg-core'
 import { users } from './users'
 import { relations } from 'drizzle-orm'
 
@@ -10,7 +10,7 @@ export const restaurants = pgTable('restaurants', {
     onDelete: 'set null',
   }),
   createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull().defaultNow()
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
 })
 
 export const restaurantsRelations = relations(restaurants, ({ one }) => {

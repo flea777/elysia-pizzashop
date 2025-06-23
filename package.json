@@ -8,7 +8,7 @@
     "build": "bun build src/http/server.ts --target bun --outdir ./dist",
     "start": "NODE_ENV=production bun src/http/server.ts",
     "test": "bun test",
-    "generate": "drizzle-kit generate",
+    "generate": "bun --env-file ./.env.local drizzle-kit generate",
     "studio": "bun --env-file ./.env.local drizzle-kit studio",
     "migrate": "bun src/db/migrate.ts",
     "seed": "bun src/db/seed.ts"
