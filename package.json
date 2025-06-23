@@ -9,10 +9,12 @@
     "start": "NODE_ENV=production bun src/http/server.ts",
     "test": "bun test",
     "generate": "drizzle-kit generate",
+    "studio": "bun --env-file ./.env.local drizzle-kit studio",
     "migrate": "bun src/db/migrate.ts",
-    "studio": "bun --env-file ./.env.local drizzle-kit studio"
+    "seed": "bun src/db/seed.ts"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
     "@types/bun": "^1.2.17",
     "@types/pg": "^8.15.4",
     "chalk": "^5.4.1",
