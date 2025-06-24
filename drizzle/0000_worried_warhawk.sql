@@ -21,7 +21,7 @@ CREATE TABLE "restaurants" (
 --> statement-breakpoint
 CREATE TABLE "auth_links" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"code" text NOT NULL,
+	"code" uuid DEFAULT gen_random_uuid() NOT NULL,
 	"user_id" uuid NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	CONSTRAINT "auth_links_code_unique" UNIQUE("code")
