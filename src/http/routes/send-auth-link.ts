@@ -1,10 +1,9 @@
-import Elysia from 'elysia'
-
 import { SendAuthLinkDtoSchema } from '../dtos/send-auth-link.dto'
 import { db } from '../../db/connection'
 import { authLinks } from '../../db/schema'
 import { env } from '../../env'
 import chalk from 'chalk'
+import Elysia from 'elysia'
 
 export const sendAuthLink = new Elysia().post(
   '/authenticate',
@@ -14,21 +13,24 @@ export const sendAuthLink = new Elysia().post(
     const userFromEmail = await db.query.users.findFirst({
       where(fields, { eq }) {
         return eq(fields.email, email)
-      }
+      },
     })
 
     if (!userFromEmail) {
       throw new Error('User not found')
     }
 
-    const [createdAuthLink] = await db.insert(authLinks).values({
-      userId: userFromEmail.id,
-    }).returning({
-      code: authLinks.code
-    })
+    const [createdAuthLink] = await db
+      .insert(authLinks)
+      .values({
+        userId: userFromEmail.id,
+      })
+      .returning({
+        code: authLinks.code,
+      })
 
     if (!createdAuthLink) {
-      throw new Error('Unexpected error')  
+      throw new Error('Unexpected error')
     }
 
     const { code } = createdAuthLink
