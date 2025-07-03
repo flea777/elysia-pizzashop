@@ -6,6 +6,8 @@ import { authenticateFromLink } from './routes/authenticate-from-link'
 import { getProfile } from './routes/get-profile'
 import { getManagedRestaurant } from './routes/get-managed-restaurant'
 import swagger from '@elysiajs/swagger'
+import chalk from 'chalk'
+import { errorHandler } from './plugins/error-handler'
 
 const app = new Elysia()
   .use(
@@ -18,6 +20,7 @@ const app = new Elysia()
       },
     })
   )
+  .use(errorHandler)
   .use(healthCheck)
   .use(registerRestaurant)
   .use(sendAuthLink)

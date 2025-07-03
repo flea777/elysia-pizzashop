@@ -1,8 +1,11 @@
 import jwt from '@elysiajs/jwt'
 import Elysia from 'elysia'
-import { env } from '../env'
-import { JwtPayloadDtoSchema, type JwtPayloadDto } from './dtos/jwt-payload.dto'
-import { UnauthorizedError } from './errors/unauthorized-error'
+import { env } from '../../env'
+import {
+  JwtPayloadDtoSchema,
+  type JwtPayloadDto,
+} from '../dtos/jwt-payload.dto'
+import { UnauthorizedError } from '../errors/unauthorized-error'
 
 export const auth = new Elysia()
   .error({
