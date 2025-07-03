@@ -4,6 +4,7 @@ import { authLinks } from '../../db/schema'
 import { env } from '../../util/env'
 import chalk from 'chalk'
 import Elysia from 'elysia'
+import { mail } from '../../lib/mail'
 
 export const sendAuthLink = new Elysia().post(
   '/authenticate',
@@ -40,6 +41,16 @@ export const sendAuthLink = new Elysia().post(
     authLink.searchParams.set('redirect', env.AUTH_REDIRECT_URL)
 
     console.log(`Generated URL: ${chalk.blueBright(authLink.toString())}`)
+
+    await mail.sendMail({
+      from: {
+        name: 'Pizza Shop',
+        address: 'hi@pizzashop.com'
+      },
+      to: email,
+      subject: 'Authenticate to Pizza Shop',
+      text: `Use the following link to authenticate on pizza shop :  ${authLink.toString()}`
+    })
   },
   {
     body: SendAuthLinkDtoSchema,
