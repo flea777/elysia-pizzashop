@@ -1,7 +1,7 @@
 import { SendAuthLinkDtoSchema } from '../dtos/send-auth-link.dto'
 import { db } from '../../db/connection'
 import { authLinks } from '../../db/schema'
-import { env } from '../../env'
+import { env } from '../../util/env'
 import chalk from 'chalk'
 import Elysia from 'elysia'
 

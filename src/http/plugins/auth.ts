@@ -1,6 +1,6 @@
 import jwt from '@elysiajs/jwt'
 import Elysia from 'elysia'
-import { env } from '../../env'
+import { env } from '../../util/env'
 import {
   JwtPayloadDtoSchema,
   type JwtPayloadDto,

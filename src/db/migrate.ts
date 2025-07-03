@@ -1,5 +1,5 @@
 import postgres from 'postgres'
-import { env } from '../env'
+import { env } from '../util/env'
 import chalk from 'chalk'
 
 import { drizzle } from 'drizzle-orm/postgres-js'
