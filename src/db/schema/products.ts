@@ -1,5 +1,6 @@
 import { uuid, text, timestamp, pgTable, integer } from 'drizzle-orm/pg-core'
-import { restaurants } from '.'
+import { orderItems, restaurants } from '.'
+import { relations } from 'drizzle-orm'
 
 export const products = pgTable('products', {
   id: uuid('id').defaultRandom().primaryKey(),
@@ -11,4 +12,15 @@ export const products = pgTable('products', {
   }),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
+})
+
+export const productsRelations = relations(products, ({ one, many }) => {
+  return {
+    restaurant: one(restaurants, {
+      fields: [products.restaurantId],
+      references: [restaurants.id],
+      relationName: 'product_restaurant',
+    }),
+    ordersItems: many(orderItems),
+  }
 })
