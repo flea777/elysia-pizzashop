@@ -15,6 +15,13 @@
       "when": 1751601829177,
       "tag": "0001_married_hairball",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1751603486120,
+      "tag": "0002_remarkable_blindfold",
+      "breakpoints": true
     }
   ]
 }
