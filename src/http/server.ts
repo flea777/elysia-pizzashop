@@ -7,6 +7,7 @@ import { getProfile } from './routes/get-profile'
 import { getManagedRestaurant } from './routes/get-managed-restaurant'
 import { errorHandler } from './plugins/error-handler'
 import { swaggerPlugin } from './plugins/swagger'
+import chalk from 'chalk'
 
 new Elysia()
   .use(swaggerPlugin)
@@ -18,5 +19,5 @@ new Elysia()
   .use(getProfile)
   .use(getManagedRestaurant)
   .listen(3333, () => {
-    console.log('Http server running!')
+    console.log(chalk.magentaBright('Http server running!'))
   })
