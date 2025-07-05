@@ -5,21 +5,11 @@ import { sendAuthLink } from './routes/send-auth-link'
 import { authenticateFromLink } from './routes/authenticate-from-link'
 import { getProfile } from './routes/get-profile'
 import { getManagedRestaurant } from './routes/get-managed-restaurant'
-import swagger from '@elysiajs/swagger'
-import chalk from 'chalk'
 import { errorHandler } from './plugins/error-handler'
+import { swaggerPlugin } from './plugins/swagger'
 
-const app = new Elysia()
-  .use(
-    swagger({
-      documentation: {
-        info: {
-          title: 'PizzaShop Documentation',
-          version: '1.0.0',
-        },
-      },
-    })
-  )
+new Elysia()
+  .use(swaggerPlugin)
   .use(errorHandler)
   .use(healthCheck)
   .use(registerRestaurant)
