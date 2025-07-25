@@ -9,6 +9,7 @@ import { errorHandler } from './plugins/error-handler'
 import { swaggerPlugin } from './plugins/swagger'
 import chalk from 'chalk'
 import { getOrderDetails } from './routes/get-order-details'
+import { approveOrder } from './routes/approve-order'
 
 new Elysia()
   .use(swaggerPlugin)
@@ -17,6 +18,7 @@ new Elysia()
   .use(registerRestaurant)
   .use(sendAuthLink)
   .use(getOrderDetails)
+  .use(approveOrder)
   .use(authenticateFromLink)
   .use(getProfile)
   .use(getManagedRestaurant)
