@@ -13,6 +13,7 @@ import { approveOrder } from './routes/approve-order'
 import { cancelOrder } from './routes/cancel-order'
 import { deliverOrder } from './routes/deliver-oder'
 import { dispatchOrder } from './routes/dispatch-order'
+import { getOrders } from './routes/get-orders'
 
 new Elysia()
   .use(swaggerPlugin)
@@ -27,6 +28,7 @@ new Elysia()
   .use(dispatchOrder)
   .use(authenticateFromLink)
   .use(getProfile)
+  .use(getOrders)
   .use(getManagedRestaurant)
   .listen(3333, () => {
     console.log(chalk.magentaBright('Http server running!'))
