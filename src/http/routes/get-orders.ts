@@ -3,7 +3,16 @@ import { auth } from '../plugins/auth'
 import { UnauthorizedError } from '../errors/unauthorized-error'
 import { OrderQueryParamDtoSchema } from '../dtos/order-query-param.dto'
 import { orders, users } from '../../db/schema'
-import { and, count, eq, getTableColumns, ilike } from 'drizzle-orm'
+import {
+  and,
+  count,
+  desc,
+  eq,
+  fillPlaceholders,
+  getTableColumns,
+  ilike,
+  sql,
+} from 'drizzle-orm'
 import { db } from '../../db/connection'
 
 export const getOrders = new Elysia().use(auth).get(
@@ -19,7 +28,13 @@ export const getOrders = new Elysia().use(auth).get(
     const orderTableColumns = getTableColumns(orders)
 
     const baseQuery = db
-      .select(orderTableColumns)
+      .select({
+        orderId: orders.id,
+        createdAt: orders.createdAt,
+        status: orders.status,
+        total: orders.totalInCents,
+        customerName: users.name,
+      })
       .from(orders)
       .innerJoin(users, eq(users.id, orders.customerId))
       .where(
@@ -33,10 +48,25 @@ export const getOrders = new Elysia().use(auth).get(
 
     const [amountOfOrdersQuery, allOrders] = await Promise.all([
       db.select({ count: count() }).from(baseQuery.as('baseQuery')),
-      db.select()
+      db
+        .select()
         .from(baseQuery.as('baseQuery'))
         .offset(pageIndex * 10)
-        .limit(10),
+        .limit(10)
+        .orderBy((fields) => {
+          {
+            return [
+              sql`CASE ${fields.status}
+                WHEN 'pending' THEN 1
+                WHEN 'processing' THEN 2
+                WHEN 'delivering' THEN 3
+                WHEN 'delivered' THEN 4
+                WHEN 'canceled' THEN 99
+              END`,
+              desc(fields.createdAt),
+            ]
+          }
+        }),
     ])
 
     const amountOfOrders = amountOfOrdersQuery[0]?.count ?? 0
