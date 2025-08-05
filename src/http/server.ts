@@ -15,6 +15,7 @@ import { deliverOrder } from './routes/deliver-oder'
 import { dispatchOrder } from './routes/dispatch-order'
 import { getOrders } from './routes/get-orders'
 import { getMonthRevenue } from './routes/get-month-revenue'
+import { getDayOrdersAmount } from './routes/get-day-orders-amount'
 
 new Elysia()
   .use(swaggerPlugin)
@@ -32,6 +33,7 @@ new Elysia()
   .use(getOrders)
   .use(getManagedRestaurant)
   .use(getMonthRevenue)
+  .use(getDayOrdersAmount)
   .listen(3333, () => {
     console.log(chalk.magentaBright('Http server running!'))
   })

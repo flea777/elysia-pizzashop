@@ -87,9 +87,7 @@ for (let i = 0; i < 50; i++) {
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     restaurantId: restaurant!.id,
-    priceInCents: Number(
-      faker.commerce.price({ min: 190, max: 490, dec: 0 })
-    ),
+    priceInCents: Number(faker.commerce.price({ min: 190, max: 490, dec: 0 })),
   })
 }
 
@@ -105,7 +103,7 @@ console.log(chalk.yellowBright('✔️ Created products!'))
  */
 type OrderItemInsert = typeof orderItems.$inferInsert
 
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 25000; i++) {
   const orderProducts = faker.helpers.arrayElements(availableProducts, {
     min: 1,
     max: 3,
