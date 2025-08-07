@@ -1,6 +1,6 @@
 import Elysia from 'elysia'
 import { auth } from '../plugins/auth'
-import { GetOrderDetailsDtoSchema } from '../dtos/get-order-details-params'
+import { GetOrderDetailsDtoSchema } from '../dtos/get-order-details-params.dto'
 import { UnauthorizedError } from '../errors/unauthorized-error'
 import { db } from '../../db/connection'
 
